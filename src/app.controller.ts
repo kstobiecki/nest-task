@@ -1,23 +1,22 @@
-import { Controller, Get, Logger } from '@nestjs/common';
+import { Body, Controller, Get, Post, Put } from '@nestjs/common';
 import { Connection } from 'typeorm';
 import { Item } from './item.entity';
-import { ItemRepository } from './item.repository';
+import { AppService } from './app.service';
 
 @Controller('items')
 export class AppController {
-  constructor(private readonly connection: Connection) {}
+  constructor(
+    private readonly connection: Connection,
+    private readonly appService: AppService,
+  ) {}
 
   @Get()
   async getItems(): Promise<Item[]> {
-    Logger.debug({ message: 'Requested for all items! Preparing QueryRunner' });
-    const qr = this.connection.createQueryRunner();
-    await qr.connect();
+    return this.appService.getItems();
+  }
 
-    Logger.debug({ message: 'Connection established, searching for items' });
-    const repo = qr.manager.getCustomRepository(ItemRepository);
-    const items = await repo.find();
-
-    Logger.debug({ message: 'Returning items', data: items });
-    return items;
+  @Post()
+  async addItem(@Body() item: Item): Promise<Item> {
+    return this.appService.addItem(item);
   }
 }
