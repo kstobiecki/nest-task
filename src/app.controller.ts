@@ -5,9 +5,7 @@ import { ItemRepository } from './item.repository';
 
 @Controller('items')
 export class AppController {
-  constructor(
-    private readonly connection: Connection
-  ) {}
+  constructor(private readonly connection: Connection) {}
 
   @Get()
   async getItems(): Promise<Item[]> {

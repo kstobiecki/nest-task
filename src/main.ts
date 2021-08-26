@@ -1,4 +1,4 @@
-import { INestApplication, Logger } from '@nestjs/common';
+import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { Database, verbose } from 'sqlite3';
 import { Connection, getConnection } from 'typeorm';
@@ -20,15 +20,17 @@ const db: Promise<Database> = new Promise((resolve, reject) => {
 
 // In ugly way filling the db
 const fillDatabase = async (): Promise<void> => {
-  const connection: Connection = await getConnection();  
-  await connection.manager.getCustomRepository(ItemRepository).save([
-    { name: 'Vizlib Library'},
-    { name: 'Vizlib Self-Service'},
-    { name: 'Vizlib Finance'},
-    { name: 'Vizlib Gantt'},
-    { name: 'Vizlib Collaboration'}
-  ])
-}
+  const connection: Connection = await getConnection();
+  await connection.manager
+    .getCustomRepository(ItemRepository)
+    .save([
+      { name: 'Vizlib Library' },
+      { name: 'Vizlib Self-Service' },
+      { name: 'Vizlib Finance' },
+      { name: 'Vizlib Gantt' },
+      { name: 'Vizlib Collaboration' },
+    ]);
+};
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -40,7 +42,6 @@ async function bootstrap() {
     Logger.log('App is listening on port 3000');
     fillDatabase();
   });
-
 }
 
 bootstrap();

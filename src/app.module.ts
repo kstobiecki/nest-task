@@ -11,9 +11,9 @@ import { Item } from './item.entity';
       database: ':memory:',
       autoLoadEntities: true,
       synchronize: true,
-      entities: [Item]
-    })
+      entities: [Item],
+    }),
   ],
-  controllers: [AppController]
+  controllers: [AppController],
 })
 export class AppModule {}
