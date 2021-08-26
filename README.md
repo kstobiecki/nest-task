@@ -38,9 +38,9 @@ $ npm run test:cov
 ## TODO's
 What needs to be mentioned -> feel free to reorganize EVERYTHING in this app to your needs. Main purpose of this task is to present your skills :rocket: so if U have any kind of pattern / template / approach go with it! 
 
-* [Task 1] We would like to add new element using POST endpoint /vizlib/items
-* [Task 2] We would like to validate somehow that newly added item before saving it into the database
-* [Task 3] We would like to cast those elements to specific format before returning to the UI (to not expose too much)
+* [Task 1] We would like to add new item using POST endpoint /vizlib/items
+* [Task 2] We would like to validate somehow that newly added item before saving it into the database (not empty + min length = 3)
+* [Task 3] We would like to cast those items to specific format before returning to the UI (to not expose too much -> omit updated field)
 
 Additional points
 * Proper status codes
