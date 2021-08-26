@@ -1,4 +1,4 @@
-import { Logger } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { Database, verbose } from 'sqlite3';
 import { Connection, getConnection } from 'typeorm';
@@ -38,6 +38,7 @@ async function bootstrap() {
   app.setGlobalPrefix('vizlib');
 
   await db;
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   await app.listen(3000, () => {
     Logger.log('App is listening on port 3000');
     fillDatabase();

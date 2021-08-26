@@ -1,13 +1,14 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Connection } from 'typeorm';
-import { Item } from './item.entity';
+import { ItemDto } from './dto/item.dto';
 import { ItemRepository } from './item.repository';
+import { CreateItemDto } from './dto/create-item.dto';
 
 @Injectable()
 export class AppService {
   constructor(private readonly connection: Connection) {}
 
-  public async getItems(): Promise<Item[]> {
+  public async getItems(): Promise<ItemDto[]> {
     Logger.debug({ message: 'Requested for all items! Preparing QueryRunner' });
     const qr = this.connection.createQueryRunner();
     await qr.connect();
@@ -20,7 +21,7 @@ export class AppService {
     return items;
   }
 
-  public async addItem(item: Item): Promise<Item> {
+  public async addItem(item: CreateItemDto): Promise<ItemDto> {
     Logger.debug({ message: 'Requested to add item! Preparing QueryRunner' });
     const qr = this.connection.createQueryRunner();
     await qr.connect();
