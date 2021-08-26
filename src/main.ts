@@ -1,5 +1,9 @@
-import { Logger, ValidationPipe } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
+import {
+  ClassSerializerInterceptor,
+  Logger,
+  ValidationPipe,
+} from '@nestjs/common';
+import { NestFactory, Reflector } from '@nestjs/core';
 import { Database, verbose } from 'sqlite3';
 import { Connection, getConnection } from 'typeorm';
 
@@ -39,6 +43,7 @@ async function bootstrap() {
 
   await db;
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
+  app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
   await app.listen(3000, () => {
     Logger.log('App is listening on port 3000');
     fillDatabase();

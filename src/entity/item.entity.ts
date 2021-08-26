@@ -5,6 +5,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Exclude } from 'class-transformer';
 
 @Entity()
 export class ItemEntity {
@@ -15,6 +16,7 @@ export class ItemEntity {
   created: string;
 
   @UpdateDateColumn()
+  @Exclude()
   updated: string;
 
   @Column()
