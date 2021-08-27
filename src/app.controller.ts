@@ -8,9 +8,8 @@ import {
   Post,
 } from '@nestjs/common';
 import { Connection } from 'typeorm';
-import { ItemDto } from './dto/item.dto';
 import { AppService } from './app.service';
-import { CreateItemDto } from './dto/create-item.dto';
+import { CreateItemDto, ItemDto } from './dto';
 
 @Controller('items')
 export class AppController {

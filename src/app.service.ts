@@ -1,8 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { Connection } from 'typeorm';
-import { ItemDto } from './dto/item.dto';
 import { ItemRepository } from './item.repository';
-import { CreateItemDto } from './dto/create-item.dto';
+import { CreateItemDto, ItemDto } from './dto';
 
 @Injectable()
 export class AppService {

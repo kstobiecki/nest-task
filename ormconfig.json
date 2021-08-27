@@ -1,0 +1,6 @@
+{
+  "synchronize": true,
+  "entities": ["dist/**/*.entity{.ts,.js}"],
+  "type": "sqlite",
+  "database": ":memory:"
+}
