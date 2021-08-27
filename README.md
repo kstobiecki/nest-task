@@ -61,3 +61,7 @@ It would be great if You can fork this repository and create a PR with finished 
 Treat us as total noobs so everything what can be "fancy" would be nice to explain somehow -> comment in the code / README
 
 Good Luck!!!
+
+## Documentation
+
+Api was documented using Swagger. After running `npm run start` you can find swagger UI under `http://localhost:3000/api/`
