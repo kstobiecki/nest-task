@@ -13,7 +13,10 @@ import { Connection } from 'typeorm';
 import { AppService } from './app.service';
 import { CreateItemDto, ItemDto } from './dto';
 
-@Controller('items')
+@Controller({
+  version: '1',
+  path: 'items',
+})
 export class AppController {
   constructor(
     private readonly connection: Connection,

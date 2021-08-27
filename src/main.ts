@@ -2,6 +2,7 @@ import {
   ClassSerializerInterceptor,
   Logger,
   ValidationPipe,
+  VersioningType,
 } from '@nestjs/common';
 import { NestFactory, Reflector } from '@nestjs/core';
 import { Database, verbose } from 'sqlite3';
@@ -40,6 +41,9 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.setGlobalPrefix('vizlib');
+  app.enableVersioning({
+    type: VersioningType.URI,
+  });
 
   await db;
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
