@@ -21,30 +21,34 @@ export class AppController {
   ) {}
 
   @Get()
-  @HttpCode(HttpStatus.OK.valueOf())
+  @HttpCode(HttpStatus.OK)
   async getItems(): Promise<ItemDto[]> {
     Logger.debug({ message: '[getItems] Requested for all items' });
     return this.appService.getItems();
   }
 
   @Post()
-  @HttpCode(HttpStatus.CREATED.valueOf())
+  @HttpCode(HttpStatus.CREATED)
   async addItem(@Body() item: CreateItemDto): Promise<ItemDto> {
-    Logger.debug({ message: 'Requested to add an item' });
+    Logger.debug({ message: '[addItem] Requested to add an item' });
     return this.appService.addItem(item);
   }
 
   @Delete('/:id')
-  @HttpCode(HttpStatus.NO_CONTENT.valueOf())
+  @HttpCode(HttpStatus.NO_CONTENT)
   async deleteItem(@Param('id') itemId: string): Promise<void> {
-    Logger.debug({ message: `Requested to delete an item ${itemId}` });
+    Logger.debug({
+      message: `[deleteItem] Requested to delete an item with id ${itemId}`,
+    });
     return this.appService.deleteItem(itemId);
   }
 
   @Post('/restore/:id')
-  @HttpCode(HttpStatus.OK.valueOf())
+  @HttpCode(HttpStatus.OK)
   async restoreItem(@Param('id') itemId: string): Promise<void> {
-    Logger.debug({ message: `Requested to restore an item ${itemId}` });
-    return this.appService.retoreItem(itemId);
+    Logger.debug({
+      message: `[restoreItem] Requested to restore an item with id ${itemId}`,
+    });
+    return this.appService.restoreItem(itemId);
   }
 }

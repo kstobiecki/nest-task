@@ -7,9 +7,6 @@ export class ItemDto {
   @IsDate()
   created: string;
 
-  @IsDate()
-  updated: string;
-
   @IsString()
   name: string;
 }
