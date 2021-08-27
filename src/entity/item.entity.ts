@@ -1,6 +1,7 @@
 import {
   Column,
   CreateDateColumn,
+  DeleteDateColumn,
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -21,4 +22,8 @@ export class ItemEntity {
 
   @Column()
   name: string;
+
+  @DeleteDateColumn()
+  @Exclude()
+  deletedAt: Date;
 }

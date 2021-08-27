@@ -15,7 +15,6 @@ export class AppService {
     Logger.debug({ message: 'Connection established, searching for items' });
     const repo = qr.manager.getCustomRepository(ItemRepository);
     const items = await repo.find();
-
     Logger.debug({ message: 'Returning items', data: items });
     return items;
   }
@@ -29,7 +28,27 @@ export class AppService {
     const repo = qr.manager.getCustomRepository(ItemRepository);
     const savedItem = await repo.save(item);
 
-    Logger.debug({ message: 'Returning saved entity', data: item });
+    Logger.debug({ message: 'Returning saved entity', data: savedItem });
     return savedItem;
+  }
+
+  public async deleteItem(itemId: string): Promise<void> {
+    Logger.debug({ message: 'Preparing QueryRunner' });
+    const qr = this.connection.createQueryRunner();
+    await qr.connect();
+
+    Logger.debug({ message: 'Connection established, deleting an item' });
+    const repo = qr.manager.getCustomRepository(ItemRepository);
+    await repo.softDelete(itemId);
+  }
+
+  public async retoreItem(itemId: string): Promise<void> {
+    Logger.debug({ message: 'Preparing QueryRunner' });
+    const qr = this.connection.createQueryRunner();
+    await qr.connect();
+
+    Logger.debug({ message: 'Connection established, deleting an item' });
+    const repo = qr.manager.getCustomRepository(ItemRepository);
+    await repo.restore(itemId);
   }
 }
