@@ -12,10 +12,11 @@ import { plainToClass } from 'class-transformer';
 import { ItemEntity } from './entity/item.entity';
 import { QueryRunner } from 'typeorm/query-runner/QueryRunner';
 import { ErrorMessageEnum } from './enums/error-message.enum';
+import { QUERY_RUNNER } from './app.tokens';
 
 @Injectable()
 export class AppService {
-  constructor(@Inject('queryRunner') private readonly qr: QueryRunner) {}
+  constructor(@Inject(QUERY_RUNNER) private readonly qr: QueryRunner) {}
 
   public async getItems(): Promise<ItemDto[]> {
     try {
