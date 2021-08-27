@@ -7,7 +7,7 @@ import {
 import { NestFactory, Reflector } from '@nestjs/core';
 import { Database, verbose } from 'sqlite3';
 import { Connection, getConnection } from 'typeorm';
-
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { ItemRepository } from './item.repository';
 
@@ -48,6 +48,14 @@ async function bootstrap() {
   await db;
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   app.useGlobalInterceptors(new ClassSerializerInterceptor(app.get(Reflector)));
+  const config = new DocumentBuilder()
+    .setTitle('VizLib recruitment task')
+    .setDescription('API for handling items')
+    .setVersion('1.0')
+    .addTag('Items')
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
   await app.listen(3000, () => {
     Logger.log('App is listening on port 3000');
     fillDatabase();

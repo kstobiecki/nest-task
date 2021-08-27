@@ -14,11 +14,11 @@ export class ItemEntity {
   id: string;
 
   @CreateDateColumn()
-  created: string;
+  created: Date;
 
   @UpdateDateColumn()
   @Exclude()
-  updated: string;
+  updated: Date;
 
   @Column()
   name: string;
