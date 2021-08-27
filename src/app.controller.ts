@@ -92,7 +92,7 @@ export class AppController {
     description: 'Successfully restored an item',
   })
   @ApiNotFoundResponse({
-    description: 'Item was not deleted',
+    description: 'Item was not restored',
   })
   @HttpCode(HttpStatus.NO_CONTENT)
   async restoreItem(@Param('id') itemId: string): Promise<void> {

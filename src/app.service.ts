@@ -74,6 +74,7 @@ export class AppService {
         message: `[restoreItem] Restoring an item with id ${itemId}`,
       });
       const repo = this.qr.manager.getCustomRepository(ItemRepository);
+      await repo.restore(itemId);
       const itemToRestore = await repo.findOne(itemId);
       if (!itemToRestore) {
         Logger.debug({
@@ -85,7 +86,6 @@ export class AppService {
           message: ErrorMessageEnum.ITEM_NOT_RESTORED,
         };
       }
-      await repo.restore(itemId);
     } catch (error: any) {
       Logger.debug({
         message: `[restoreItem - error] item with id ${itemId} was not restored`,
