@@ -9,7 +9,7 @@ export class AppService {
   constructor(private readonly connection: Connection) {}
 
   public async getItems(): Promise<ItemDto[]> {
-    Logger.debug({ message: 'Requested for all items! Preparing QueryRunner' });
+    Logger.debug({ message: 'Preparing QueryRunner' });
     const qr = this.connection.createQueryRunner();
     await qr.connect();
 
@@ -22,7 +22,7 @@ export class AppService {
   }
 
   public async addItem(item: CreateItemDto): Promise<ItemDto> {
-    Logger.debug({ message: 'Requested to add item! Preparing QueryRunner' });
+    Logger.debug({ message: 'Preparing QueryRunner' });
     const qr = this.connection.createQueryRunner();
     await qr.connect();
 
