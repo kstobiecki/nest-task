@@ -1,4 +1,11 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Post,
+} from '@nestjs/common';
 import { Connection } from 'typeorm';
 import { ItemDto } from './dto/item.dto';
 import { AppService } from './app.service';
@@ -12,11 +19,13 @@ export class AppController {
   ) {}
 
   @Get()
+  @HttpCode(HttpStatus.OK.valueOf())
   async getItems(): Promise<ItemDto[]> {
     return this.appService.getItems();
   }
 
   @Post()
+  @HttpCode(HttpStatus.CREATED.valueOf())
   async addItem(@Body() item: CreateItemDto): Promise<ItemDto> {
     return this.appService.addItem(item);
   }
